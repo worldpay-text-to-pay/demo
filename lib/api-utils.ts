@@ -1,3 +1,4 @@
+// Utility functions for API calls
 export function getHeaders() {
   return {
     accept: "application/json",
