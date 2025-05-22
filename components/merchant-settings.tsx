@@ -117,7 +117,7 @@ export default function MerchantSettings() {
         <div className="flex justify-between items-center">
           <div>
             <CardTitle>Merchant Settings</CardTitle>
-            <CardDescription>View and update your merchant settings for text-to-pay</CardDescription>
+            <CardDescription>Update your merchant settings for text-to-pay</CardDescription>
           </div>
         </div>
       </CardHeader>

@@ -186,6 +186,17 @@ export default function PaymentCreation() {
 
       setPayments((prev) => [newPayment, ...prev])
       setSuccess("Payment request sent successfully! A text message has been sent to the customer.")
+
+      // Reset the form after successful payment
+      setFormData({
+        customerId: "",
+        totalAmount: 0,
+        currency: "USD",
+        invoiceTitle: "",
+        invoiceReference: "",
+        invoiceDate: new Date().toISOString().split("T")[0],
+        message: "Thank you for your business. Please pay your invoice.",
+      })
     } catch (err: any) {
       setError(`Error creating payment: ${err.message}`)
       console.error(err)

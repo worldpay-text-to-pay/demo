@@ -8,6 +8,7 @@ const inter = Inter({ subsets: ["latin"] })
 export const metadata = {
   title: "Worldpay Text-to-Pay Demo",
   description: "A demonstration of Worldpay's text-to-pay API capabilities",
+    generator: 'v0.dev'
 }
 
 export default function RootLayout({
