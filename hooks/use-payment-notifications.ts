@@ -27,7 +27,7 @@ export function usePaymentNotifications() {
         // Show toast with clickable description
         toast({
           title: "Payment Status Updated!",
-          description: `Payment ${paymentId} status: ${notification.data?.paymentDetails?.status} (View Details)`,
+          description: `Payment ${paymentId} status: ${notification.data?.paymentDetails?.status} (Go to Payment History to view details)`,
           variant: "default",
           duration: 8000,
         })
