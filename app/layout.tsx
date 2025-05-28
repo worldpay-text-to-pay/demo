@@ -1,9 +1,8 @@
-"use client"
 import type React from "react"
 import "./globals.css"
 import { Inter } from "next/font/google"
 import { ThemeProvider } from "@/components/theme-provider"
-import { usePaymentNotifications } from "@/hooks/use-payment-notifications" // <-- Add this import
+import { PaymentNotificationListener } from "@/components/payment-notification-listener"
 
 const inter = Inter({ subsets: ["latin"] })
 
@@ -18,12 +17,11 @@ export default function RootLayout({
 }: {
   children: React.ReactNode
 }) {
-  usePaymentNotifications()
-
   return (
     <html lang="en">
       <body className={inter.className}>
         <ThemeProvider attribute="class" defaultTheme="light" enableSystem disableTransitionOnChange>
+          <PaymentNotificationListener />
           {children}
         </ThemeProvider>
       </body>
