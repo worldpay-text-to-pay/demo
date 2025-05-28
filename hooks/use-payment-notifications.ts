@@ -14,14 +14,14 @@ export function usePaymentNotifications() {
         if (paymentId) {
           let payments = []
           try {
-            payments = JSON.parse(localStorage.getItem("payments") || "[]")
+            payments = JSON.parse(localStorage.getItem("worldpay-payments") || "[]")
           } catch {}
           payments = payments.map((p: any) =>
             p.id === paymentId
               ? { ...p, status: notification.data.paymentDetails.status }
               : p
           )
-          localStorage.setItem("payments", JSON.stringify(payments))
+          localStorage.setItem("worldpay-payments", JSON.stringify(payments))
         }
 
         // Show toast
