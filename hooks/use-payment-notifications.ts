@@ -24,19 +24,12 @@ export function usePaymentNotifications() {
           localStorage.setItem("worldpay-payments", JSON.stringify(payments))
         }
 
-        // Show toast
+        // Show toast with clickable description
         toast({
           title: "Payment Status Updated!",
-          description: `Payment ${paymentId} status: ${notification.data?.paymentDetails?.status}`,
+          description: `Payment ${paymentId} status: ${notification.data?.paymentDetails?.status} (View Details)`,
           variant: "default",
           duration: 8000,
-          // Make the toast clickable
-          action: {
-            label: "View Details",
-            onClick: () => {
-              window.dispatchEvent(new CustomEvent("worldpay-view-payment-details", { detail: { paymentId } }))
-            }
-          }
         })
 
         window.dispatchEvent(new Event("worldpay-payments-updated"))
