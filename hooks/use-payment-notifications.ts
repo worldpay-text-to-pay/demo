@@ -26,9 +26,10 @@ export function usePaymentNotifications() {
 
         // Show toast
         toast({
-          title: "Payment Updated",
+          title: "Payment Status Updated!",
           description: `Payment ${paymentId} status: ${notification.data?.paymentDetails?.status}`,
-          variant: "default",
+          variant: "destructive", // or another visible variant
+          duration: 8000, // 8 seconds
         })
       } catch (e) {
         console.error("Failed to process payment notification", e)
