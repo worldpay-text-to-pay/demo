@@ -2,7 +2,7 @@
 
 import type React from "react"
 
-import { useState, useEffect } from "react"
+import { useEffect, useState } from "react"
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card"
 import { Button } from "@/components/ui/button"
 import { Input } from "@/components/ui/input"
@@ -102,6 +102,37 @@ export default function PaymentCreation() {
       }
     }
   }, [formData.customerId, customers])
+
+  // Update payments state when worldpay-payments-updated event is received
+  useEffect(() => {
+    const handler = () => {
+      setPayments(safeGetPayments())
+    }
+    window.addEventListener("worldpay-payments-updated", handler)
+    return () => window.removeEventListener("worldpay-payments-updated", handler)
+  }, [])
+
+  // Select payment details when worldpay-view-payment-details event is received
+  useEffect(() => {
+    const handler = (e: Event) => {
+      const customEvent = e as CustomEvent<{ paymentId: string }>
+      const payment = payments.find((p) => p.id === customEvent.detail.paymentId)
+      if (payment) {
+        setSelectedPayment(payment)
+        // Optionally, switch to the "history" tab if not already
+        const historyTab = document.querySelector('[data-state="active"][data-value="history"]')
+        if (!historyTab) {
+          // If you use a Tabs state, set it here
+          // For example, if you use useState for tab: setTab("history")
+          // Or trigger a click on the history tab trigger:
+          const trigger = document.querySelector('[role="tab"][data-value="history"]') as HTMLElement
+          trigger?.click()
+        }
+      }
+    }
+    window.addEventListener("worldpay-view-payment-details", handler)
+    return () => window.removeEventListener("worldpay-view-payment-details", handler)
+  }, [payments])
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
     const { name, value } = e.target

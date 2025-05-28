@@ -28,9 +28,18 @@ export function usePaymentNotifications() {
         toast({
           title: "Payment Status Updated!",
           description: `Payment ${paymentId} status: ${notification.data?.paymentDetails?.status}`,
-          variant: "destructive", // or another visible variant
-          duration: 8000, // 8 seconds
+          variant: "default",
+          duration: 8000,
+          // Make the toast clickable
+          action: {
+            label: "View Details",
+            onClick: () => {
+              window.dispatchEvent(new CustomEvent("worldpay-view-payment-details", { detail: { paymentId } }))
+            }
+          }
         })
+
+        window.dispatchEvent(new Event("worldpay-payments-updated"))
       } catch (e) {
         console.error("Failed to process payment notification", e)
       }
